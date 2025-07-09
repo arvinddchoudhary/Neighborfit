@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferences - NeighborFit</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🏠</span>
+                <span class="logo-text">NeighborFit</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="{% url 'home' %}" class="nav-link">Home</a>
+                <a href="{% url 'preferences' %}" class="nav-link active">Preferences</a>
+                <a href="{% url 'about' %}" class="nav-link">About</a>
+                <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="preferences-main">
+        <div class="container">
+            <div class="preferences-header">
+                <h1 class="page-title">Tell us what matters to you</h1>
+                <p class="page-subtitle">Help us find the perfect neighborhood match by sharing your lifestyle preferences.</p>
+            </div>
+
+            <form method="post" action="{% url 'results' %}">
+
+                {% csrf_token %}
+                <div class="form-section">
+                    <h2 class="form-section-title">Location</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <select id="city" name="city" required>
+                                <option value="">Select your city</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="bengaluru">Bengaluru</option>
+                                <option value="chennai">Chennai</option>
+                                <option value="hyderabad">Hyderabad</option>
+                                <option value="jaipur">Jaipur</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Area</label>
+                            <select id="area" name="area" required disabled>
+                                <option value="">Select city first</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="form-section-title">Lifestyle Preferences</h2>
+                    <p class="form-section-subtitle">Rate each factor from 0 (not important) to 3 (very important)</p>
+                    
+                    <div class="preferences-grid">
+                        {% for factor in factors %}
+                        <div class="preference-item">
+                            <div class="preference-header">
+                                {% if factor == 'parks' %}<span class="preference-icon">🏞️</span>
+                                {% elif factor == 'schools' %}<span class="preference-icon">🎓</span>
+                                {% elif factor == 'safety' %}<span class="preference-icon">🛡️</span>
+                                {% elif factor == 'transit' %}<span class="preference-icon">🚇</span>
+                                {% elif factor == 'nightlife' %}<span class="preference-icon">🎭</span>
+                                {% elif factor == 'income' %}<span class="preference-icon">💰</span>{% endif %}
+                                <label for="{{ factor }}">{{ factor|capfirst }}</label>
+                            </div>
+                            <div class="slider-container">
+                                <input type="range" id="{{ factor }}" name="{{ factor }}" min="0" max="3" value="1" class="slider">
+                                <div class="slider-labels">
+                                    <span>0</span><span>1</span><span>2</span><span>3</span>
+                                </div>
+                            </div>
+                            <div class="preference-value" id="{{ factor }}-value">1</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-button">Find Matches</button>
+                </div>
+            </form>
+
+            <div class="loading-container" id="loading-container" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Finding your perfect neighborhood matches...</p>
+            </div>
+
+            <div class="results-container" id="results-container" style="display: none;">
+                <h2 class="results-title">Your Top 5 Neighborhood Matches</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="families">Good for Families</button>
+                    <button class="filter-btn" data-filter="nightlife">Nightlife Lovers</button>
+                    <button class="filter-btn" data-filter="quiet">Quiet Areas</button>
+                </div>
+                <div class="results-grid" id="results-grid"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🏠</span>
+                        <span class="logo-text">NeighborFit</span>
+                    </div>
+                    <p>Helping you find the perfect neighborhood for your lifestyle.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'preferences' %}">Preferences</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📷</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeighborFit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/preferences.js' %}" defer></script>
+</body>
+</html>

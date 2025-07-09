@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - NeighborFit</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🏠</span>
+                <span class="logo-text">NeighborFit</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="{% url 'home' %}" class="nav-link">Home</a>
+                <a href="{% url 'preferences' %}" class="nav-link">Preferences</a>
+                <a href="{% url 'about' %}" class="nav-link active">About</a>
+                <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="about-main">
+        <div class="container">
+            <div class="about-header">
+                <h1 class="page-title">Why NeighborFit?</h1>
+                <p class="page-subtitle">Discover how we're revolutionizing the way people find their perfect neighborhood.</p>
+            </div>
+
+            <section class="about-section">
+                <div class="section-content">
+                    <div class="content-text">
+                        <h2>The Challenge</h2>
+                        <p>Finding the right neighborhood in a big city can be overwhelming. With countless areas to choose from, each with its own unique character, amenities, and lifestyle factors, making the right choice feels impossible.</p>
+                        <p>Traditional methods of neighborhood research are time-consuming, fragmented, and often unreliable. People end up making one of life's biggest decisions based on incomplete information.</p>
+                    </div>
+                    <div class="content-visual">
+                        <div class="visual-icon">🏙️</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="section-content reverse">
+                    <div class="content-visual">
+                        <div class="visual-icon">🎯</div>
+                    </div>
+                    <div class="content-text">
+                        <h2>Our Solution</h2>
+                        <p>NeighborFit uses advanced algorithms and comprehensive data analysis to match your unique lifestyle preferences with the perfect neighborhood. We consider factors that matter most to you - from parks and schools to safety and nightlife.</p>
+                        <p>Our platform eliminates guesswork and saves you countless hours of research by providing personalized, data-driven recommendations tailored to your specific needs.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="how-it-works">
+                <h2 class="section-title">How It Works</h2>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Choose Your City</h3>
+                            <p>Select from major Indian cities including Delhi, Mumbai, Bengaluru, Chennai, Hyderabad, and Jaipur.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Set Your Preferences</h3>
+                            <p>Rate the importance of various lifestyle factors like parks, schools, safety, transit, nightlife, and income level.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Get Your Matches</h3>
+                            <p>Receive personalized recommendations for the top 5 neighborhoods that best match your lifestyle preferences.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testimonials">
+                <h2 class="section-title">What Our Users Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"NeighborFit helped me find the perfect area in Mumbai that matched my need for good schools and parks. The recommendations were spot on!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👩‍💼</div>
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <p>Software Engineer, Mumbai</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"As a young professional, I needed good nightlife and transit options. NeighborFit found me the ideal neighborhood in Bengaluru within minutes."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👨‍💻</div>
+                            <div class="author-info">
+                                <h4>Arjun Patel</h4>
+                                <p>Marketing Manager, Bengaluru</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"Moving to a new city was stressful until I found NeighborFit. It made choosing the right neighborhood so much easier and more confident."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👨‍🎓</div>
+                            <div class="author-info">
+                                <h4>Rajesh Kumar</h4>
+                                <p>Research Analyst, Delhi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🏠</span>
+                        <span class="logo-text">NeighborFit</span>
+                    </div>
+                    <p>Helping you find the perfect neighborhood for your lifestyle.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'preferences' %}">Preferences</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📷</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeighborFit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

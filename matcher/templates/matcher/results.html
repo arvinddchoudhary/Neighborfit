@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Matches - NeighborFit</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/results.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🏠</span>
+                <span class="logo-text">NeighborFit</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="{% url 'home' %}" class="nav-link">Home</a>
+                <a href="{% url 'preferences' %}" class="nav-link">Preferences</a>
+                <a href="{% url 'about' %}" class="nav-link">About</a>
+                <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="results-main">
+        <div class="container">
+            <div class="results-header">
+                <h1 class="page-title">Your Perfect Neighborhood Matches</h1>
+                <p class="page-subtitle">Based on your preferences, here are the top neighborhoods that fit your lifestyle.</p>
+                
+                <div class="preferences-summary" id="preferences-summary">
+                    {% if city or area %}
+                        <div class="preferences-summary-content">
+                            {% if city %}
+                            <div class="summary-item">
+                                <span class="summary-label">City:</span>
+                                <span class="summary-value">{{ city }}</span>
+                            </div>
+                            {% endif %}
+                            {% if area %}
+                            <div class="summary-item">
+                                <span class="summary-label">Area:</span>
+                                <span class="summary-value">{{ area }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="loading-container" id="loading-container" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Finding your perfect neighborhood matches...</p>
+            </div>
+
+            <div class="results-container" id="results-container" {% if not recommendations %}style="display: none;"{% endif %}>
+                <div class="results-actions">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All Results</button>
+                        <button class="filter-btn" data-filter="families">Good for Families</button>
+                        <button class="filter-btn" data-filter="nightlife">Nightlife Lovers</button>
+                        <button class="filter-btn" data-filter="quiet">Quiet Areas</button>
+                    </div>
+                    <div class="results-count" id="results-count">
+                        Showing <span id="count-number">{{ recommendations|length }}</span> neighborhoods
+                    </div>
+                </div>
+
+                <div class="results-grid" id="results-grid">
+                    {% if recommendations %}
+                        {% for neighborhood in recommendations %}
+                            <div class="result-card fade-in" data-category="{{ neighborhood.category|default:'all' }}">
+                                <h3>{{ neighborhood.name }}</h3>
+                                <p>{{ neighborhood.description }}</p>
+                                <div class="result-highlights">
+                                    {% for tag in neighborhood.highlights %}
+                                        <span class="highlight-tag">{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No recommendations found. Try different preferences.</p>
+                    {% endif %}
+                </div>
+
+                <div class="results-footer">
+                    <a href="{% url 'preferences' %}" class="secondary-button">Try Different Preferences</a>
+                    <button class="primary-button" onclick="window.print()">Save Results</button>
+                </div>
+            </div>
+
+            <div class="no-results" id="no-results" {% if recommendations %}style="display: none;"{% endif %}>
+                <div class="no-results-content">
+                    <div class="no-results-icon">🔍</div>
+                    <h2>No matches found</h2>
+                    <p>We couldn't find neighborhoods that match your current preferences. Try adjusting your criteria for better results.</p>
+                    <a href="{% url 'preferences' %}" class="cta-button">Adjust Preferences</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🏠</span>
+                        <span class="logo-text">NeighborFit</span>
+                    </div>
+                    <p>Helping you find the perfect neighborhood for your lifestyle.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'preferences' %}">Preferences</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📷</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeighborFit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/results.js' %}" defer></script>
+</body>
+</html>

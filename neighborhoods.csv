@@ -1,0 +1,31 @@
+city,area,neighborhood,parks,schools,safety,transit,nightlife,income
+Delhi,Hauz Khas,HK Block A,3,4,4,3,2,60000
+Delhi,Hauz Khas,HK Block B,2,3,5,4,3,62000
+Delhi,Rohini,Rohini Sector 7,4,5,4,4,2,58000
+Delhi,Rohini,Rohini Sector 13,3,4,3,3,3,59000
+Delhi,Connaught Place,CP Central,2,3,4,5,5,75000
+Delhi,Connaught Place,CP East,3,4,3,4,4,73000
+Mumbai,Andheri,Andheri East,4,4,3,4,4,70000
+Mumbai,Andheri,Andheri West,3,3,4,4,3,72000
+Mumbai,Bandra,Bandra East,2,4,3,3,5,75000
+Mumbai,Bandra,Bandra West,3,3,4,5,5,77000
+Mumbai,Colaba,Colaba Market,4,4,4,3,3,71000
+Mumbai,Colaba,Colaba Fort,3,3,5,4,2,69000
+Jaipur,Malviya Nagar,MN Block A,3,3,4,3,2,50000
+Jaipur,Malviya Nagar,MN Block B,2,2,3,3,1,48000
+Jaipur,Vaishali Nagar,VN Block A,4,4,4,4,3,53000
+Jaipur,Vaishali Nagar,VN Block B,3,3,4,3,2,51000
+Jaipur,Mansarovar,MSV Block A,2,3,3,3,2,49000
+Jaipur,Mansarovar,MSV Block B,3,3,3,2,1,47000
+Bangalore,Indiranagar,Indiranagar 1st Stage,4,5,5,4,4,80000
+Bangalore,Indiranagar,Indiranagar 2nd Stage,4,4,5,5,5,82000
+Bangalore,Koramangala,Koramangala 4th Block,3,4,4,4,4,78000
+Bangalore,Koramangala,Koramangala 5th Block,4,4,3,3,3,76000
+Bangalore,Whitefield,Whitefield East,3,3,3,3,2,70000
+Bangalore,Whitefield,Whitefield West,2,2,3,4,2,69000
+Hyderabad,Banjara Hills,BH Block A,3,4,4,4,3,72000
+Hyderabad,Banjara Hills,BH Block B,2,3,5,4,4,74000
+Hyderabad,Gachibowli,Gachibowli Central,4,5,4,4,3,76000
+Hyderabad,Gachibowli,Gachibowli Heights,3,4,4,3,2,75000
+Hyderabad,Jubilee Hills,JH Main,5,5,5,5,5,90000
+Hyderabad,Jubilee Hills,JH Extension,4,4,4,4,3,88000
