@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from django.views import View
-from rest_framework.decorators import APIView
-from rest_framework.response import Response
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
+from django.shortcuts import render # type: ignore
+from django.views import View # type: ignore
+from rest_framework.decorators import APIView # type: ignore
+from rest_framework.response import Response # type: ignore
+from django.views.decorators.csrf import csrf_exempt # type: ignore
+from django.utils.decorators import method_decorator # type: ignore
 
 from .models import Neighborhood
 from .serializers import NeighborhoodSerializer
