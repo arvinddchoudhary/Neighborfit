@@ -466,29 +466,43 @@ const mockNeighborhoods = {
 
 // Initialize results page
 function initializeResults() {
+    console.log('Initializing results page...');
+    
+    // Get preferences from URL parameters or localStorage
     const preferences = getPreferencesData();
     
     if (!preferences) {
-        window.location.href = '/preferences/';
+        console.log('No preferences found, redirecting to preferences page');
+        // Redirect to preferences page if no data found
+        window.location.href = 'preferences.html';
         return;
     }
-
-    // Send preferences to Django via POST and render server-rendered HTML
-    sendPreferencesToDjango(preferences);
+    
+    console.log('Found preferences:', preferences);
+    
+    // Display preferences summary
+    displayPreferencesSummary(preferences);
+    
+    // Generate and display results
+    generateResults(preferences);
+    
+    // Initialize filter functionality
+    initializeFilters();
 }
-
 
 // Get preferences data from localStorage or URL
 function getPreferencesData() {
     // Try to get from localStorage first
     const storedPreferences = localStorage.getItem('neighborfit-preferences');
     if (storedPreferences) {
+        console.log('Found preferences in localStorage:', storedPreferences);
         return JSON.parse(storedPreferences);
     }
     
     // Try to get from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('city')) {
+        console.log('Found preferences in URL parameters');
         return {
             city: urlParams.get('city'),
             area: urlParams.get('area'),
@@ -501,6 +515,7 @@ function getPreferencesData() {
         };
     }
     
+    console.log('No preferences found');
     return null;
 }
 
@@ -554,6 +569,8 @@ function displayPreferencesSummary(preferences) {
 
 // Generate results based on preferences
 async function generateResults(preferences) {
+    console.log('Generating results for preferences:', preferences);
+    
     const loadingContainer = document.getElementById('loading-container');
     const resultsContainer = document.getElementById('results-container');
     const noResultsContainer = document.getElementById('no-results');
@@ -592,6 +609,7 @@ async function generateResults(preferences) {
         // Use a longer timeout to simulate loading and ensure proper display
         setTimeout(() => {
             const mockResults = generateMockResults(preferences);
+            console.log('Generated mock results:', mockResults);
             displayResults(mockResults);
         }, 1500);
     }
@@ -599,7 +617,14 @@ async function generateResults(preferences) {
 
 // Generate mock results based on preferences
 function generateMockResults(preferences) {
+    console.log('Generating mock results for city:', preferences.city);
     const cityData = mockNeighborhoods[preferences.city] || [];
+    console.log('Found city data:', cityData);
+    
+    if (cityData.length === 0) {
+        console.log('No data found for city:', preferences.city);
+        return [];
+    }
     
     // Calculate scores based on preferences
     const scoredNeighborhoods = cityData.map(neighborhood => {
@@ -622,13 +647,18 @@ function generateMockResults(preferences) {
     });
     
     // Sort by score and return top 5
-    return scoredNeighborhoods
+    const results = scoredNeighborhoods
         .sort((a, b) => b.score - a.score)
         .slice(0, 5);
+    
+    console.log('Scored and sorted results:', results);
+    return results;
 }
 
 // Display results
 function displayResults(results) {
+    console.log('Displaying results:', results);
+    
     const loadingContainer = document.getElementById('loading-container');
     const resultsContainer = document.getElementById('results-container');
     const noResultsContainer = document.getElementById('no-results');
@@ -646,6 +676,7 @@ function displayResults(results) {
     }
     
     if (results.length === 0) {
+        console.log('No results to display, showing no results message');
         if (noResultsContainer) {
             noResultsContainer.style.display = 'block';
         }
@@ -680,6 +711,8 @@ function displayResults(results) {
             resultsContainer.style.visibility = 'visible';
         }, 100);
     }
+    
+    console.log('Results displayed successfully');
 }
 
 // Create result card
@@ -798,8 +831,6 @@ function saveNeighborhood(neighborhoodName) {
         alert(`${neighborhoodName} is already in your saved neighborhoods.`);
     }
 }
-
-
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeResults);
